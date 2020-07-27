@@ -1,26 +1,36 @@
 import React, {useEffect, useState} from 'react'
 import {axiosWithAuth} from '../utils/axiosWithAuth'
-import {getRecipes, postRecipe} from '../actions/actions'
-import {connect} from 'react-redux'
+
 import Recipe from './Recipe'
 import RecipeForm from './RecipeForm'
-import {useHistory} from 'react-router-dom'
+
+import {RecipeContext} from '../contexts/RecipeContext'
 
 
 export const Recipes = props => {
 
+    const [recipes, setRecipes] = useState([])
+
     useEffect(() => {
-        props.getRecipes()
+        axiosWithAuth()
+        .get('https://lambdaschool-cookbook2.herokuapp.com/recipes')
+        .then(res => {
+            console.log(res)
+            setRecipes(res.data.recipes)       
+        })
+        .catch(err => {
+            console.log(err)
+        })
     },[])
 
-
+    
  
     return (
         <div>
             <h1>Welcome</h1>
           
             {/* <RecipeForm /> */}
-            {props.recipes.map(recipe => {                
+            {recipes.map(recipe => {                
                     return(
                         <Recipe recipe={recipe} />
                     )                
@@ -32,10 +42,5 @@ export const Recipes = props => {
     )
 }
 
-const mapStateToProps = state => ({
-    recipes: state.recipes,
-    error: state.error
-})
-export default connect(mapStateToProps,
-    {getRecipes, postRecipe}
-    )(Recipes)
+
+export default Recipes

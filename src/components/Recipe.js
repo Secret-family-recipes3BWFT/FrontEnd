@@ -6,7 +6,7 @@ export const Recipe = props => {
     return (
         <div>
             <h2>Title: {recipe.title}</h2>
-    <b>Source: {recipe.source}</b>
+            <b>Source: {recipe.source}</b>
         </div>
     )
 }
