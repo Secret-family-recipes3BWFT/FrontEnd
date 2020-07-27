@@ -1,5 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
+import AxiosWithAuth from '../utils/axiosWithAuth'
 
 
 // Styled Components! ------------------------------- //
@@ -38,18 +39,68 @@ const SubmitButton = styled.button`
 
 `
 
-function Register () {
+//----------------------------------------------------------//
+
+const initialRegisterValues = {
+
+    name: '',
+    email: '',
+    password: ''
+  
+  }
+
+//------------------------------------------------------------//
+
+function Register (props) {
+
+
+    const [signUpData, setSignUpData] = useState(initialRegisterValues)
+
+    const handleChange = e => {
+
+        setSignUpData({
+            ...signUpData,
+            [e.target.name]: e.target.value,
+
+        });
+    }
+
+
+    const handleSubmit = e => {
+
+        e.preventDefault();
+        AxiosWithAuth()
+            .post('/auth/register', signUpData)
+            .then( (res) => {
+                localStorage.setItem('token', res.data.token);
+                console.log(res)
+
+                if (res.data.newUser) {
+                    props.history.push(`/${res.data.newUser}`);
+                } else {
+                    props.history.push('/register')
+                }
+            })
+
+            .catch( (err) => console.log({err}));
+
+    }
+
+   
+
 
     return (
         <div>
         <PageTitle>Register</PageTitle>
           <div className='form'>
-          <form>
+          <form onSubmit={handleSubmit}>
             <p><TextInput
                 name='name'
                 id='name'
                 placeholder='Full Name Here'
                 type='text'
+                value={signUpData.name}
+                onChange={handleChange}
             /></p>
 
             <p>
@@ -58,6 +109,8 @@ function Register () {
                 id='email'
                 placeholder='Email Address Here'
                 type='email'
+                value={signUpData.email}
+                onChange={handleChange}
             /></p>
 
             <p>
@@ -66,6 +119,8 @@ function Register () {
                 id='password'
                 placeholder='Password Here'
                 type='password'
+                value={signUpData.password}
+                onChange={handleChange}
              /></p>
              <SubmitButton type='submit'>Register!</SubmitButton>
           </form>

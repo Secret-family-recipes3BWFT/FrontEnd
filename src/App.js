@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import styled from 'styled-components'
 import PrivateRoute from './components/PrivateRoute'
@@ -54,33 +54,16 @@ const LinkButton = styled.button`
 // Initial Form Values -----------------------------//
 
 
-const initialRegisterValues = {
 
-  name: '',
-  email: '',
-  password: ''
 
-}
 
-const initialLoginValues = {
-
-  email: '',
-  password: ''
-
-}
 
 // THE APP ----------------------------------------------- //
 
 
 function App() {
 
-    const [signUpData, setSignUpData] = useState(initialRegisterValues)
-
-    const [login, setLogin] = useState(initialLoginValues)
-
-
-
-
+    
   return (
     
       <Router>
@@ -89,13 +72,13 @@ function App() {
             <AppTitle>Traditionize</AppTitle>
             <div>
             <Link to={'#'}><LinkButton>About</LinkButton></Link>
-            <Link to={'/'}><LinkButton>Register</LinkButton></Link>
+            <Link to={'/register'}><LinkButton>Register</LinkButton></Link>
             <Link to={'/login'}><LinkButton>Login</LinkButton></Link>
             </div>
           </PageHeader>
 
 
-          <Route exact path='/'>
+          <Route exact path='/register'>
             <Register />
           </Route>
           
