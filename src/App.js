@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import styled from 'styled-components'
 import PrivateRoute from './components/PrivateRoute'
 import Recipes from './components/Recipes'
+
+import RecipeForm from './components/RecipeForm'
+
 import './App.css';
 import Register from './components/Register'
 import Login from './components/Login'
@@ -77,7 +80,6 @@ function App() {
             </div>
           </PageHeader>
 
-
           <Route exact path='/register'>
             <Register />
           </Route>
@@ -87,6 +89,9 @@ function App() {
             <Login />
           </Route>
 
+         <PrivateRoute path='/protected' component={Recipes} />
+         <PrivateRoute path='/protected/newrecipe' component={RecipeForm} />
+      </Router>
 
             <PrivateRoute path='/protected' component={Recipes}></PrivateRoute>
 
