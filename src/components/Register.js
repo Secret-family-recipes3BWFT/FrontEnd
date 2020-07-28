@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
+import * as yup from 'yup'
 
 
 // Styled Components! ------------------------------- //
@@ -60,12 +61,74 @@ function Register (props) {
 
     const handleChange = e => {
 
+      inputChange(e)
+
         setSignUpData({
             ...signUpData,
             [e.target.name]: e.target.value,
 
         });
     }
+
+    const formSchema = yup.object().shape({
+      password: yup
+      .string()
+      .min(6, "Password must be at least 6 characters long")
+      .required("Password is required"),
+  
+    });
+  
+  
+    const [errors, setErrors] = useState({
+      password: ''
+    });
+  
+  
+    const inputChange = e => {
+  
+      e.persist();
+  
+      yup
+      .reach(formSchema, 'password')
+      
+      .validate(e.target.value)
+     
+      .then(valid => {
+        setErrors({
+          ...errors,
+          [e.target.name]: ""
+        });
+      })
+     
+      .catch(err => {
+        setErrors({
+          ...errors,
+          [e.target.name]: err.errors
+        });
+      });
+  
+        setSignUpData({
+          ...signUpData,
+          [e.target.name]: e.target.value
+        });
+  
+  
+    }  
+  
+  
+  
+  const [isButtonDisabled, setButtonDisabled] = useState(true)
+  
+  
+  useEffect(() => {
+    
+    formSchema.isValid(signUpData).then(valid => {
+      setButtonDisabled(!valid);
+      console.log(valid)
+    });
+  }, [signUpData]);
+
+
 
 
     const handleSubmit = e => {
@@ -124,7 +187,9 @@ function Register (props) {
                 value={signUpData.password}
                 onChange={handleChange}
              /></p>
-             <SubmitButton type='submit'>Register!</SubmitButton>
+             <SubmitButton type='submit' disabled={isButtonDisabled}>Register!</SubmitButton>
+             <p>{errors.password}</p>
+
           </form>
           </div>
 
