@@ -94,7 +94,7 @@ function Login () {
             <p><TextInput
                 name='username'
                 id='username'
-                placeholder='Email Address Here'
+                placeholder='Username Here'
                 type='text'
                 value={login.username}
                 onChange={handleChange}
