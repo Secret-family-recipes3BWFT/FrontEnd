@@ -42,6 +42,15 @@ const AppTitle = styled.h1`
   margin-bottom: 0px;
 `
 
+const AppSubTitle = styled.h1`
+  font-size: 1.2rem;
+  font-family: 'Cantata One', serif;
+  color: #390701;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-style: italic;
+`
+
 const LinkButton = styled.button`
   border: 0px solid white;
   margin: 10px;
@@ -75,6 +84,7 @@ function App() {
       <ApplicationBox>
           <PageHeader>
             <AppTitle>Traditionize</AppTitle>
+            <AppSubTitle>Preserving Food Traditions For Your Family</AppSubTitle>
             <div>
             <Link to={'#'}><LinkButton>About</LinkButton></Link>
             <Link to={'/register'}><LinkButton>Register</LinkButton></Link>
