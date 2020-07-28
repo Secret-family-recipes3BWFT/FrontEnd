@@ -61,6 +61,13 @@ const LinkButton = styled.button`
   color: white;
   font-family: 'Roboto', sans-serif;
   font-size: 1.5rem;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: #390701;
+    transition: 0.5s;
+
+  }
 `
 
 
