@@ -51,6 +51,8 @@ export const Recipes = props => {
         <div>
             <h1>Welcome</h1>
 
+            <h2>Recipes</h2>
+
             <SearchBar changeSearch={changeSearch} />
             {/* <RecipeForm /> */}
             {searchedRecipes.map(recipe => {                
@@ -58,8 +60,10 @@ export const Recipes = props => {
                         <Recipe recipe={recipe} searchValue={search} />
                     )                
             })}
-            <h1>No Recipes?</h1>
+            <br></br><br></br>
+            <h2>No Recipes?</h2>
             <button onClick={()=> {push('/newrecipe')}}>Add New Recipe</button>
+            <br></br><br></br>
           
             {/* <RecipeForm   /> */}
         </div>
