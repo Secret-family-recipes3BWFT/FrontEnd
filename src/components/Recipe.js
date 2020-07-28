@@ -2,6 +2,14 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 
+
+const RecipeCard = styled.div`
+    background-color: #BFD7D2;
+    margin: 20px;
+    border-radius: 18px;
+    padding: 15px;
+`
+
 export const Recipe = props => {
 
     const [photos, setPhotos] = useState([])
@@ -34,7 +42,7 @@ console.log(photos)
     
     const {recipe} = props
     return (
-        <div>
+        <RecipeCard>
             <h2>Title: {recipe.title}</h2>
             <b>Source: {recipe.source}</b>
             
@@ -45,7 +53,7 @@ console.log(photos)
             })}
 
            
-        </div>
+        </RecipeCard>
     )
 }
 
