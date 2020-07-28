@@ -139,7 +139,7 @@ function Register (props) {
             .then( (res) => {
                 localStorage.setItem('token', res.data.token);
                 console.log(res)
-              push('/recipes')
+              push('/protected')
                 if (res.data.newUser) {
                     props.history.push(`/recipes/${res.data.newUser}`);
                 } else {

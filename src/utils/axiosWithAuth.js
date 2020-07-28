@@ -9,3 +9,5 @@ export const axiosWithAuth = () => {
       baseURL: 'https://lambdaschool-cookbook2.herokuapp.com'
    })
 }
+
+export default axiosWithAuth
