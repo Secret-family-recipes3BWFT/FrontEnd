@@ -90,10 +90,10 @@ function App() {
           </Route>
 
          <PrivateRoute path='/protected' component={Recipes} />
-         <PrivateRoute path='/protected/newrecipe' component={RecipeForm} />
-      </Router>
+         {/* <PrivateRoute path='/protected/newrecipe' component={RecipeForm} /> */}
+  
 
-            <PrivateRoute path='/protected' component={Recipes}></PrivateRoute>
+            {/* <PrivateRoute path='/protected' component={Recipes}></PrivateRoute> */}
 
 
       </ApplicationBox>
