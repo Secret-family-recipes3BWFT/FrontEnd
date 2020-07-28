@@ -139,12 +139,12 @@ function Register (props) {
             .then( (res) => {
                 localStorage.setItem('token', res.data.token);
                 console.log(res)
-              push('/login')
-                // if (res.data.newUser) {
-                //     props.history.push(`/${res.data.newUser}`);
-                // } else {
-                //     props.history.push('/register')
-                // }
+              push('/recipes')
+                if (res.data.newUser) {
+                    props.history.push(`/recipes/${res.data.newUser}`);
+                } else {
+                    props.history.push('/register')
+                }
             })
 
             .catch( (err) => console.log({err}));
