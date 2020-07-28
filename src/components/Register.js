@@ -99,7 +99,7 @@ function Register (props) {
             <p><TextInput
                 name='username'
                 id='username'
-                placeholder='Full Name Here'
+                placeholder='Username Here'
                 type='text'
                 value={signUpData.username}
                 onChange={handleChange}
