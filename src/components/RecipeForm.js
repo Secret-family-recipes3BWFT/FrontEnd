@@ -82,7 +82,7 @@ export const RecipeForm = props => {
             <h1>New</h1>
             <form onSubmit={addRecipe}>                
                 <label>
-                    Title: 
+                   <b>Title: </b> 
                 <input
                 type='text'
                 name='title'
@@ -91,7 +91,7 @@ export const RecipeForm = props => {
                 />
                 </label>
                 <label>
-                    Source:  
+                   <b>Source: </b> 
                 <input
                 type='text'
                 name='source'
@@ -101,7 +101,7 @@ export const RecipeForm = props => {
                 </label>
                 
                 <label>
-                    Notes: 
+                    <b>Notes: </b> 
                     <input
                 type='text'
                 name='notes'

@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import AxiosWithAuth from '../utils/axiosWithAuth'
+import axios from 'axios'
+import {useHistory} from 'react-router-dom'
 
 
 // Styled-Components ------------------------------------//
@@ -41,7 +42,7 @@ const SubmitButton = styled.button`
 
 const initialLoginValues = {
 
-    email: '',
+    username: '',
     password: ''
   
   }
@@ -50,7 +51,8 @@ const initialLoginValues = {
 
 function Login () {
 
-    
+  const {push} = useHistory()
+
 
     const [login, setLogin] = useState(initialLoginValues)
 
@@ -67,11 +69,12 @@ function Login () {
 
         e.preventDefault();
         
-        AxiosWithAuth()
-            .post('/api/auth/login', login)
+        axios.post('https://lambdaschool-cookbook2.herokuapp.com/auth/login', login)
             .then(
                 res => {
+                  console.log(res)
                     localStorage.setItem('token', res.data.token);
+                    push('/protected')
                 })
             
             .catch( (err) => console.log({err})
@@ -89,16 +92,16 @@ function Login () {
 
             <form onSubmit={handleSubmit}>
             <p><TextInput
-                name='email'
-                id='email'
+                name='username'
+                id='username'
                 placeholder='Email Address Here'
-                type='email'
-                value={login.email}
+                type='text'
+                value={login.username}
                 onChange={handleChange}
               /></p>
 
             <p><TextInput
-                name='passsword'
+                name='password'
                 id='password'
                 placeholder='Password Here'
                 type='password'

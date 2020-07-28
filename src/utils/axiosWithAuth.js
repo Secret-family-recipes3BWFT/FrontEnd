@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const AxiosWithAuth = () => {
+export const axiosWithAuth = () => {
    const token = localStorage.getItem("token");
    return axios.create({
      headers: {
@@ -9,4 +9,3 @@ const AxiosWithAuth = () => {
       baseURL: 'https://lambdaschool-cookbook2.herokuapp.com'
    })
 }
-export default AxiosWithAuth

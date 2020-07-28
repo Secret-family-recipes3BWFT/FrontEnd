@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import AxiosWithAuth from '../utils/axiosWithAuth'
+import {useHistory} from 'react-router-dom'
+import axios from 'axios'
 
 
 // Styled Components! ------------------------------- //
@@ -43,8 +44,8 @@ const SubmitButton = styled.button`
 
 const initialRegisterValues = {
 
-    name: '',
-    email: '',
+    username: '',
+    // email: '',
     password: ''
   
   }
@@ -52,6 +53,7 @@ const initialRegisterValues = {
 //------------------------------------------------------------//
 
 function Register (props) {
+  const {push} = useHistory()
 
 
     const [signUpData, setSignUpData] = useState(initialRegisterValues)
@@ -69,17 +71,17 @@ function Register (props) {
     const handleSubmit = e => {
 
         e.preventDefault();
-        AxiosWithAuth()
-            .post('/auth/register', signUpData)
+        axios
+            .post('https://lambdaschool-cookbook2.herokuapp.com/auth/register', signUpData)
             .then( (res) => {
                 localStorage.setItem('token', res.data.token);
                 console.log(res)
-
-                if (res.data.newUser) {
-                    props.history.push(`/${res.data.newUser}`);
-                } else {
-                    props.history.push('/register')
-                }
+              push('/login')
+                // if (res.data.newUser) {
+                //     props.history.push(`/${res.data.newUser}`);
+                // } else {
+                //     props.history.push('/register')
+                // }
             })
 
             .catch( (err) => console.log({err}));
@@ -95,14 +97,14 @@ function Register (props) {
           <div className='form'>
           <form onSubmit={handleSubmit}>
             <p><TextInput
-                name='name'
-                id='name'
+                name='username'
+                id='username'
                 placeholder='Full Name Here'
                 type='text'
-                value={signUpData.name}
+                value={signUpData.username}
                 onChange={handleChange}
             /></p>
-
+{/* 
             <p>
             <TextInput
                 name='email'
@@ -111,11 +113,11 @@ function Register (props) {
                 type='email'
                 value={signUpData.email}
                 onChange={handleChange}
-            /></p>
+            /></p> */}
 
             <p>
             <TextInput
-                name='passsword'
+                name='password'
                 id='password'
                 placeholder='Password Here'
                 type='password'
