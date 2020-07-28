@@ -1,12 +1,15 @@
 import React, {useState} from 'react'
 import {axiosWithAuth} from '../utils/axiosWithAuth'
+import {useHistory} from 'react-router-dom'
+
+
 
     const initialState =   {
         title: "",
         source: "",
         notes: "",
         ingredients: [
-            "Creme De Menth - White"
+            ""
         ],
         instructions: [
             "",
@@ -20,6 +23,8 @@ import {axiosWithAuth} from '../utils/axiosWithAuth'
 
 
 export const RecipeForm = props => {
+
+    const {push} = useHistory()
  
     const [formValues, setFormValues] = useState(initialState)
 
@@ -68,19 +73,20 @@ export const RecipeForm = props => {
         .then(res => {
             console.log(res)
             
+            
         })
         .catch(err => {
             console.log(err)
            
         })
-
+        push('/protected')
     }
 
     
     return (
-        <div>
-            <h1>New</h1>
-            <form onSubmit={addRecipe}>                
+        <div className='addRecipe'>
+            {/* <h1>New</h1> */}
+            <form onSubmit={addRecipe} className='recipeForm'>                
                 <label>
                    <b>Title: </b> 
                 <input
@@ -150,6 +156,7 @@ export const RecipeForm = props => {
                     })}
                     </label>
                     <button>Create Recipe</button>
+                    <button onClick={()=>{push('/protected')}}>cancel</button>
             </form>
         </div>
     )

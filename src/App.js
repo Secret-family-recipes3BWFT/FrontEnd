@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, useHistory } from "react-router-dom";
 import styled from 'styled-components'
 import PrivateRoute from './components/PrivateRoute'
 import Recipes from './components/Recipes'
+
 
 import RecipeForm from './components/RecipeForm'
 
@@ -65,6 +66,7 @@ const LinkButton = styled.button`
 
 
 function App() {
+  
 
     
   return (
@@ -90,6 +92,7 @@ function App() {
           </Route>
 
          <PrivateRoute path='/protected' component={Recipes} />
+         <PrivateRoute path='/newrecipe' component={RecipeForm} />
          {/* <PrivateRoute path='/protected/newrecipe' component={RecipeForm} /> */}
   
 
