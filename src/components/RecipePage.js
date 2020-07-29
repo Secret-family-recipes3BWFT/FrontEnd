@@ -16,7 +16,7 @@ const LinkButton = styled.button`
   margin: 10px;
   border-radius: 5px;
   background-color: #F26D00;
-  width: 100px;
+  width: 200px;
   height: 40px; 
   color: white;
   font-family: 'Roboto', sans-serif;
@@ -42,7 +42,21 @@ export const RecipePage = props => {
             console.log(err)
         })
     },[])
-    console.log('recipe', recipe.instructions)
+
+    const deleteRecipe = e => {
+        e.preventDefault()
+        axiosWithAuth()
+        .delete(`https://lambdaschool-cookbook2.herokuapp.com/recipes/${id}`)
+        .then(res => {
+            console.log(res)
+            
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        push('/recipes')
+    }
+    // console.log('recipe', recipe.instructions)
     return (
         <div>
             <RecipeCard>
@@ -61,7 +75,9 @@ export const RecipePage = props => {
                     )
                 })}
                 <br></br>
-                <LinkButton onClick={() => {push('/protected')}}>Go Back</LinkButton>
+                <LinkButton onClick={() => {push('/recipes')}}>Go Back</LinkButton>
+                <LinkButton onClick={() => {push(`/updaterecipe/${id}`)}}>Update Recipe</LinkButton>
+                <LinkButton onClick={deleteRecipe}>Delete Recipe</LinkButton>
             </RecipeCard>
         </div>
     )
