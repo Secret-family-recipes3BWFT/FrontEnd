@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link, useHistory } from "react-router-d
 import styled from 'styled-components'
 import PrivateRoute from './components/PrivateRoute'
 import Recipes from './components/Recipes'
-
+import RecipePage from './components/RecipePage'
 
 import RecipeForm from './components/RecipeForm'
 
@@ -110,6 +110,7 @@ function App() {
 
          <PrivateRoute path='/protected' component={Recipes} />
          <PrivateRoute path='/newrecipe' component={RecipeForm} />
+         <PrivateRoute path='/recipe/:id' component={RecipePage} />
          {/* <PrivateRoute path='/protected/newrecipe' component={RecipeForm} /> */}
   
 
