@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
+import {useHistory} from 'react-router-dom'
 
 
 const RecipeCard = styled.div`
@@ -13,7 +14,7 @@ const RecipeCard = styled.div`
 export const Recipe = props => {
 
     const [photos, setPhotos] = useState([])
-
+    const {push} = useHistory()
     
 
 
@@ -40,9 +41,10 @@ export const Recipe = props => {
 
 console.log(photos)
     
-    const {recipe} = props
+    const {recipe, key} = props
+    console.log(recipe.id)
     return (
-        <RecipeCard>
+        <RecipeCard onClick={() => {push(`/recipe/${recipe.id}`)}}>
             <h2>Title: {recipe.title}</h2>
             <b>Source: {recipe.source}</b>
             
