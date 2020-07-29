@@ -93,7 +93,7 @@ function App() {
             <AppTitle>Traditionize</AppTitle>
             <AppSubTitle>Preserving Food Traditions For Your Family</AppSubTitle>
             <div>
-            <Link to={'#'}><LinkButton>About</LinkButton></Link>
+            <a href='http://selahcreativeservices.com/traditionize/Front_page.html'><LinkButton>About</LinkButton></a>
             <Link to={'/register'}><LinkButton>Register</LinkButton></Link>
             <Link to={'/login'}><LinkButton>Login</LinkButton></Link>
             </div>
