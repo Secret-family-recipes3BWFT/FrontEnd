@@ -74,7 +74,7 @@ function Login () {
                 res => {
                   console.log(res)
                     localStorage.setItem('token', res.data.token);
-                    push('/protected')
+                    push('/recipes')
                 })
             
             .catch( (err) => console.log({err})

@@ -1,36 +1,82 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import {useParams} from 'react-router-dom'
 import {axiosWithAuth} from '../utils/axiosWithAuth'
+import styled, { StyleSheetManager } from 'styled-components'
 import {useHistory} from 'react-router-dom'
 
+const RecipeCard = styled.div`
+    background-color: #BFD7D2;
+    margin: 20px;
+    border-radius: 18px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+`
+const LinkButton = styled.button`
+  border: 0px solid white;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #F26D00;
+  width: 200px;
+  height: 40px; 
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+`
 
+const initialState =   {
+    title: "",
+    source: "",
+    notes: "",
+    ingredients: [
+        ""
+    ],
+    instructions: [
+        "",
+        ""
+    ],
+    tags: [
+        "",
+        ""
+    ]
+}
 
-    const initialState =   {
-        title: "",
-        source: "",
-        notes: "",
-        ingredients: [
-            ""
-        ],
-        instructions: [
-            "",
-            ""
-        ],
-        tags: [
-            "",
-            ""
-        ]
-    }
-
-
-export const RecipeForm = props => {
-
-    const {push} = useHistory()
- 
+export const UpdateRecipe = props => {
+    const {id} = useParams()
+    console.log('id', id)
     const [formValues, setFormValues] = useState(initialState)
-
     const ingredients = formValues.ingredients.slice()
     const instructions = formValues.instructions.slice()
     const tags = formValues.tags.slice()
+    // const [recipe, setRecipe] = useState({})
+    // const [instructions, setInstructions] = useState([])
+    // const [tags, setTags] = useState([])
+    const {push} = useHistory()
+    useEffect(() => {
+        axiosWithAuth()
+        .get(`https://lambdaschool-cookbook2.herokuapp.com/recipes/${id}`)
+        .then(res => {
+            console.log(res)
+            setFormValues(res.data.recipe)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    },[])
+
+    const updateRecipe = e => {
+        e.preventDefault()
+        axiosWithAuth()
+        .put(`https://lambdaschool-cookbook2.herokuapp.com/recipes/${id}`, formValues)
+        .then(res => {
+            console.log(res)
+            
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        push('/recipes')
+    }
 
     const ingredientChangeHandler = (e, index) => {
         ingredients[index] = e.target.value        
@@ -65,28 +111,12 @@ export const RecipeForm = props => {
         })
         console.log(formValues)
     }
-    const addRecipe = e => {
-        e.preventDefault()
-       
-        axiosWithAuth()
-        .post('https://lambdaschool-cookbook2.herokuapp.com/recipes', formValues)
-        .then(res => {
-            console.log(res)
-            
-            
-        })
-        .catch(err => {
-            console.log(err)
-           
-        })
-        push('/recipes')
-    }
 
-    
+    console.log(formValues)
     return (
-        <div className='addRecipe'>
-            {/* <h1>New</h1> */}
-            <form onSubmit={addRecipe} className='recipeForm'>                
+        <div>
+            <RecipeCard>
+            <form onSubmit={updateRecipe} className='recipeForm'>                
                 <label>
                    <b>Title: </b> 
                 <input
@@ -155,11 +185,13 @@ export const RecipeForm = props => {
                         
                     })}
                     </label>
-                    <button>Create Recipe</button>
-                    <button onClick={()=>{push('/recipes')}}>cancel</button>
+                    <LinkButton>Update</LinkButton>
+                    <LinkButton onClick={() => {push(`/recipes`)}}>Cancel</LinkButton>
+                    
             </form>
+            </RecipeCard>
         </div>
     )
 }
 
-export default RecipeForm
+export default UpdateRecipe

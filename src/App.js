@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import PrivateRoute from './components/PrivateRoute'
 import Recipes from './components/Recipes'
 import RecipePage from './components/RecipePage'
-
+import UpdateRecipe from './components/UpdateRecipe'
 import RecipeForm from './components/RecipeForm'
 
 import './App.css';
@@ -108,9 +108,10 @@ function App() {
             <Login />
           </Route>
 
-         <PrivateRoute path='/protected' component={Recipes} />
+         <PrivateRoute path='/recipes' component={Recipes} />
          <PrivateRoute path='/newrecipe' component={RecipeForm} />
          <PrivateRoute path='/recipe/:id' component={RecipePage} />
+         <PrivateRoute path='/updaterecipe/:id' component={UpdateRecipe} />
          {/* <PrivateRoute path='/protected/newrecipe' component={RecipeForm} /> */}
   
 
