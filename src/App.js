@@ -6,7 +6,7 @@ import Recipes from './components/Recipes'
 import RecipePage from './components/RecipePage'
 import UpdateRecipe from './components/UpdateRecipe'
 import RecipeForm from './components/RecipeForm'
-import Logout from './components/Logout'
+
 import './App.css';
 import Register from './components/Register'
 import Login from './components/Login'
