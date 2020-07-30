@@ -83,7 +83,10 @@ const LinkButton = styled.button`
 
 function App() {
   
-
+  const logout = () => {
+    localStorage.clear('token');
+    window.location.reload();
+  }
     
   return (
     
@@ -96,6 +99,10 @@ function App() {
             <a href='http://selahcreativeservices.com/traditionize/Front_page.html'><LinkButton>About</LinkButton></a>
             <Link to={'/register'}><LinkButton>Register</LinkButton></Link>
             <Link to={'/login'}><LinkButton>Login</LinkButton></Link>
+            <Link to={'/recipes'}><LinkButton>Recipes</LinkButton></Link>
+            <LinkButton onClick={logout}>Logout</LinkButton>
+            
+
             </div>
           </PageHeader>
 
