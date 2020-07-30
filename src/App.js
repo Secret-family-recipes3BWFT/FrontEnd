@@ -6,7 +6,7 @@ import Recipes from './components/Recipes'
 import RecipePage from './components/RecipePage'
 import UpdateRecipe from './components/UpdateRecipe'
 import RecipeForm from './components/RecipeForm'
-
+import Logout from './components/Logout'
 import './App.css';
 import Register from './components/Register'
 import Login from './components/Login'
@@ -83,7 +83,10 @@ const LinkButton = styled.button`
 
 function App() {
   
-
+  const logout = () => {
+    localStorage.clear('token');
+    window.location.reload();
+  }
     
   return (
     
@@ -96,6 +99,10 @@ function App() {
             <Link to={'#'}><LinkButton>About</LinkButton></Link>
             <Link to={'/register'}><LinkButton>Register</LinkButton></Link>
             <Link to={'/login'}><LinkButton>Login</LinkButton></Link>
+            <Link to={'/recipes'}><LinkButton>Recipes</LinkButton></Link>
+            <LinkButton onClick={logout}>Logout</LinkButton>
+            
+
             </div>
           </PageHeader>
 
